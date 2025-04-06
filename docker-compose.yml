@@ -31,19 +31,5 @@ services:
       - DB_PORT=5432
     command: npm run start
     depends_on:
-      - migrate
-
-  migrate:
-    build:
-      context: ./
-      dockerfile: ./Dockerfile
-    environment:
-      - NODE_ENV=development
-      - DB_USER=myuser
-      - DB_HOST=postgres
-      - DB_NAME=tasks
-      - DB_PASSWORD=qwerty
-      - DB_PORT=5432
-    command: npm run migrate
-    depends_on:
       - postgres
+

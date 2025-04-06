@@ -6,7 +6,8 @@ export class TasksStorage {
     constructor(db: Pool) {
         this.db = db;
     }
-    async create (name:string, date:string):Promise<Task> {
+    async create (name:string, date:string ):Promise<Task> {
+        console.log(`Creating task ${name} in ${date}`);
         const result = await this.db.query('INSERT INTO tasks (name, date) VALUES ($1, $2) RETURNING id, name, date', [name, date]);
         return result.rows[0];
     }

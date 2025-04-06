@@ -11,6 +11,14 @@ export class TasksController {
 
 
     async create(req: Request, res: Response, next: NextFunction){
+
+        if(!req.body.name || req.body.name.trim() === ""){
+            throw new Error("Invalid input name");
+        }
+        if(!req.body.date || req.body.date.trim() === ""){
+            res.status(400).send("Invalid input date");
+        }
+
         const {name, date} = req.body;
         try {
             const task = await this.tasksStorage.create(name, date)
@@ -35,10 +43,10 @@ export class TasksController {
     }
 
     async delete(req: Request, res: Response, next: NextFunction){
-        const {id} = req.body;
+        const {id} = req.params;
         try {
             const task = await this.tasksStorage.delete(id)
-            res.status(203)
+            res.status(204).json({})
         } catch (error) {
             next(error);
         }

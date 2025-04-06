@@ -28,7 +28,7 @@ export async function initDB (pool: Pool) {
     CREATE TABLE IF NOT EXISTS tasks (
         id SERIAL PRIMARY KEY,
         name TEXT NOT NULL,
-        date DATE NOT NULL DEFAULT now()
+        date TIMESTAMP NOT NULL
         )`
     )
 }
